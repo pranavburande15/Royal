@@ -1,0 +1,55 @@
+{% extends "admin/base.html" %}
+
+{% block title %}{{ title }} | Royal Enfield Admin{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">
+    <a href="{% url 'admin:index' %}" style="color: #d11a2a; font-weight: bold; letter-spacing: 1px;">
+        🏍️ ROYAL ENFIELD ADMIN PORTAL
+    </a>
+</h1>
+{% endblock %}
+
+{% block extrastyle %}
+{{ block.super }}
+<style>
+    /* Main Navigation & Header Background */
+    #header {
+        background: #111111 !important;
+        color: #ffffff !important;
+        border-bottom: 3px solid #d11a2a !important;
+    }
+    
+    #header a:link, #header a:visited {
+        color: #ffffff !important;
+    }
+    
+    /* Buttons Background (Log in, Save etc.) */
+    .button, input[type=submit], input[type=button], .submit-row input {
+        background: #d11a2a !important;
+        color: #ffffff !important;
+        border: none !important;
+        font-weight: bold !important;
+        border-radius: 4px !important;
+    }
+    
+    .button:hover, input[type=submit]:hover {
+        background: #b30000 !important;
+    }
+
+    /* Modules and Tables Header */
+    .module h2, .module caption, textarea, table style {
+        background: #1a1a1a !important;
+        color: #d11a2a !important;
+    }
+
+    div.breadcrumbs {
+        background: #222222 !important;
+        color: #ccc !important;
+    }
+    
+    a:link, a:visited {
+        color: #d11a2a;
+    }
+</style>
+{% endblock %}

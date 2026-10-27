@@ -1,0 +1,96 @@
+{% extends 'bikes/base.html' %}
+
+{% block content %}
+<style>
+    .hero {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+    .hero h1 {
+        font-size: 42px;
+        color: #e6e6e6;
+        margin-bottom: 10px;
+    }
+    .hero p {
+        color: #a0a0a0;
+        font-size: 18px;
+    }
+    .bike-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+    }
+    .bike-card {
+        background-color: #1e1e1e;
+        border-radius: 8px;
+        overflow: hidden;
+        border: 1px solid #333;
+        transition: transform 0.3s, border-color 0.3s;
+    }
+    .bike-card:hover {
+        transform: translateY(-5px);
+        border-color: #d11a2a;
+    }
+    .bike-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+    .bike-info {
+        padding: 20px;
+    }
+    .bike-info h3 {
+        font-size: 22px;
+        color: #fff;
+        margin-bottom: 5px;
+    }
+    .price {
+        color: #d11a2a;
+        font-size: 18px;
+        font-weight: bold;
+        margin: 10px 0;
+    }
+    .btn {
+        display: inline-block;
+        background-color: #d11a2a;
+        color: #fff;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 4px;
+        font-weight: bold;
+        margin-top: 10px;
+    }
+    .btn:hover {
+        background-color: #b30000;
+    }
+</style>
+
+<div class="hero">
+    <h1>MADE LIKE A GUN, GOES LIKE A BULLET</h1>
+    <p>Explore our lineup and book a test ride today.</p>
+</div>
+
+<div style="text-align: center; margin: 30px 0;">
+    <form method="GET" action="{% url 'home' %}" style="display: flex; justify-content: center; gap: 10px; margin-top: 20px;">
+        <input type="text" name="q" value="{{ request.GET.q }}" placeholder="Search Royal Enfield bike (e.g. Classic 350)..." style="padding: 12px 20px; width: 320px; border-radius: 25px; border: 1px solid #ccc; font-size: 16px; outline: none; color: #000;">
+        <button type="submit" style="padding: 12px 25px; background-color: #d11a2a; color: white; border: none; border-radius: 25px; font-size: 16px; cursor: pointer; margin-left: 10px; font-weight: bold;">Search</button>
+    </form>
+</div>
+
+
+<div class="bike-grid">
+    {% for bike in bikes %}
+    <div class="bike-card">
+        <img src="{{ bike.image_url }}" alt="{{ bike.name }}">
+        <div class="bike-info">
+            <h3>{{ bike.name }}</h3>
+            <p style="color: #888;">{{ bike.tagline }}</p>
+            <div class="price">₹ {{ bike.price }}</div>
+            <a href="{% url 'bike_details' bike.id %}" class="btn">View & Book Ride</a>
+        </div>
+    </div>
+    {% empty %}
+    <p>No bikes available in the showroom right now. Add some from Admin Panel!</p>
+    {% endfor %}
+</div>
+{% endblock %}

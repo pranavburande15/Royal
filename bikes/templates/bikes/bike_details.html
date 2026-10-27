@@ -1,0 +1,112 @@
+{% extends 'bikes/base.html' %}
+
+{% block content %}
+<style>
+    .detail-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        background-color: #1e1e1e;
+        padding: 30px;
+        border-radius: 8px;
+    }
+    .detail-container img {
+        width: 100%;
+        border-radius: 8px;
+    }
+    .specs {
+        margin: 20px 0;
+        background: #2a2a2a;
+        padding: 15px;
+        border-radius: 6px;
+    }
+    .form-group {
+        margin-bottom: 15px;
+    }
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        color: #ccc;
+    }
+    .form-group input {
+        width: 100%;
+        padding: 10px;
+        background: #2a2a2a;
+        border: 1px solid #444;
+        color: #fff;
+        border-radius: 4px;
+    }
+    .book-btn {
+        width: 100%;
+        background-color: #d11a2a;
+        color: white;
+        padding: 12px;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+    .book-btn:hover {
+        background-color: #b30000;
+    }
+</style>
+
+<div class="detail-container">
+    <div>
+        <img src="{{ Bike.image_url }}" alt="{{ Bike.name }}">
+        <h2 style="margin-top: 20px; color: #d11a2a;">{{ bike.name }}</h2>
+        <p>{{ Bike.description }}</p>
+        <div class="specs">
+            <p><strong>Engine Capacity:</strong> {{ bike.engine_cc }} cc</p>
+            <p><strong>Max Power:</strong> {{ bike.power_hp }} bhp</p>
+            <p><strong>Ex-Showroom Price:</strong> ₹ {{ bike.price }}</p>
+        </div>
+    </div>
+
+        <div style="margin-top: 25px; background: #1a1a1a; padding: 15px; border-radius: 8px;">
+            <h4 style="color: #d11a2a; margin-bottom: 10px;">Available Colors & Variants</h4>
+            
+            <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                {% for variant in bike.variants.all %}
+                    <div style="background: #2b2b2b; padding: 10px 15px; border-radius: 6px; border: 1px solid #444; display: flex; align-items: center; gap: 10px;">
+                        <!-- Color Circle -->
+                        <span style="width: 18px; height: 18px; border-radius: 50%; background-color: {{ variant.color_code }}; display: inline-block; border: 1px solid #fff;"></span>
+                        
+                        <span style="font-weight: bold; color: #fff;">{{ variant.color_name }}</span>
+                        
+                        {% if variant.price_addition > 0 %}
+                            <span style="font-size: 0.85em; color: #aaa;">(+ ₹{{ variant.price_addition }})</span>
+                        {% endif %}
+                    </div>
+                {% empty %}
+                    <p style="color: #aaa; margin: 0;">Standard Variant Available.</p>
+                {% endfor %}
+            </div>
+        </div>
+
+    <div>
+        <h3>Book a Test Ride</h3>
+        <form method="POST" style="margin-top: 20px;">
+            {% csrf_token %}
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" name="full_name" required placeholder="Enter your full name">
+            </div>
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" name="email" required placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+                <label>Phone Number</label>
+                <input type="tel" name="phone" required placeholder="Enter your phone number">
+            </div>
+            <div class="form-group">
+                <label>Preferred Date</label>
+                <input type="date" name="preferred_date" required>
+            </div>
+            <button type="submit" class="book-btn">Confirm Test Ride</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

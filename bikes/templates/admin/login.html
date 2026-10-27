@@ -1,0 +1,70 @@
+{% extends "admin/login.html" %}
+
+{% block branding %}
+<h1 id="site-name">
+    <a href="#" style="color: #d11a2a; font-weight: bold; letter-spacing: 1px; text-decoration: none;">
+        🏍️ ROYAL ENFIELD ADMIN PORTAL
+    </a>
+</h1>
+{% endblock %}
+
+{% block extrastyle %}
+{{ block.super }}
+<style>
+    body {
+        background-color: #121212 !important;
+        color: #ffffff !important;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    #container {
+        background: #1a1a1a !important;
+        border: 1px solid #333 !important;
+        border-radius: 10px !important;
+        box-shadow: 0px 4px 20px rgba(0,0,0,0.8) !important;
+        overflow: hidden;
+    }
+
+    #header {
+        background: #111111 !important;
+        border-bottom: 3px solid #d11a2a !important;
+        color: #ffffff !important;
+    }
+
+    .form-row label {
+        color: #cccccc !important;
+        font-weight: bold;
+    }
+
+    .form-row input[type=text], .form-row input[type=password] {
+        background: #2b2b2b !important;
+        color: #ffffff !important;
+        border: 1px solid #444 !important;
+        border-radius: 5px !important;
+        padding: 8px !important;
+        width: 100% !important;
+        box-sizing: border-box;
+    }
+
+    .submit-row input[type=submit] {
+        background: #d11a2a !important;
+        color: #ffffff !important;
+        border: none !important;
+        font-weight: bold !important;
+        border-radius: 5px !important;
+        padding: 10px 20px !important;
+        cursor: pointer !important;
+        width: 100% !important;
+        font-size: 15px !important;
+        transition: 0.3s;
+    }
+
+    .submit-row input[type=submit]:hover {
+        background: #b30000 !important;
+    }
+
+    a:link, a:visited {
+        color: #d11a2a !important;
+    }
+</style>
+{% endblock %}
